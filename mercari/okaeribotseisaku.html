@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <style type="text/css" >
+    #wrapper {
+        width:850px;
+        margin :250 auto ;
+        border:1px solid #ff6481;
+  }
+    body{
+      font-family: sans-serif;
+    }
+    body{
+    font-size : 14px;
+    }
+        </style>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./assets/showcasestyle.css">
+
+    <title>OKAERIBOT</title>
+  </head>
+  <body>
+    <div style="margin-left:300px;margin-right:150px;">
+      <h1><font size="38pt">OKAERIBOT制作過程</font></h1>
+      <br>
+        <h1><font size="5pt">1.発想</font></h1>
+      <br>
+      <p><font size="3pt"><strong>一人暮らし生活の寂しさを減らせるものを作りたかったので、どんなものならそれができるかを考えた
+</strong></font></p>
+
+      小さいロボット：ちゃんとしたものでないと、おもちゃぐらいにしかならないので寂しさは減らない。記述が足りてない。
+<br>
+        ->ロボットの機能から声をだすだけなら自分でも作れそう
+<br>
+              ->家に入った時すきな人の音声を流す装置
+      <br><br>
+   <strong>:arduinoに、磁気センサー（ドアスイッチ）と人感センサーを繋いで条件を満たしたらSDカードに保存した音を鳴らす。</strong>
+   <br>
+   条件：門が開けていて＋人が通る
+   <br>
+   <img src="./pic/ok.jpeg" width="450" height="280" alt="a4book">
+<br>
+設計図
+<br><br><br>
+<h1><font size="5pt">2.制作計画</font></h1>
+<br>
+<p><font size="3pt"><strong>設計図を描き、必要な材料を購入し、計画を立つ</strong></font></p>
+<br>
+<div id="wrapper">
+  <strong>・制作計画</strong>
+  <br><br>
+  ①　プログラミング
+
+  <ol>
+  <li>arduinoの勉強：各センサーでLEDを光らせる</li>
+  <li>２つのセンサーで音を鳴らす</li>
+  </ol>
+  <br>
+  ②　側を作る
+  <ol>
+  <li>サイズを測って設計図を描く</li>
+  <li>Tinkercadで作成・印刷</li>
+  </ol>
+  <br>
+  ③　使用動画を取る
+  <br><br>
+</div>
+<br>
+
+購入した材料
+<br>
+<img src="./pic/ok1.jpeg" width="450" height="280" alt="a4book">
+<img src="./pic/ok0.png" width="622" height="230" alt="a4book">
+
+<br>
+<br>
+<h2><font size="4pt"><strong></strong>『①　プログラミング』</font></h2>
+<strong>⑴　arduinoの勉強：各センサーでLEDを光らせる</strong>
+<div id="wrapper">
+  <br>
+  <strong>・人感センサー</strong>
+  <br>
+  <br>
+  <img src="./pic/ardu1.png" width="430" height="540" alt="a4book">
+<br><br>
+人を検知したら０、してなかったら１をシリアル通信に表示する。
+<br>
+（検知したらLOW、してなかったらHIGH)
+<br>
+<strong>なので、人がいたらLEDがひかる。人がいたら（検知したら）LEDは光らない。</strong>
+<br>
+<br>
+</div>
+<br><br>
+<div id="wrapper">
+
+<br>
+<strong>・磁気センサー</strong>
+<br><br>
+<img src="./pic/ardu2.png" width="430" height="440" alt="a4book">
+<br>
+門が開けていたら０、閉じていたら１をシリアル通信に表示する。<br>
+門が開けていたら（門の信号がLOWなら）LEDはHIGH（ひかる）、閉じていたら（門の信号がHIGHなら)LOW（光らない)
+<br><br>
+動画もあります。
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/R-dXyxnWc8g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<br><br>
+<strong>⑵　２つのセンサーで音を鳴らす</strong>
+<br><br>
+センサーを２つ繋いで、音がなる条件を作る：本番のプログラミングを始める。
+<br>
+（アンプとスピーカーはんだ付けしておく）
+<br>
+<br>
+コードの出所：<a href="https://www.arduino.cc/en/Tutorial/ArduinoSoundWavePlayback">ArduinoSoundWavePlayback</a>のものを拾って実験。
+<br>
+<br>
+<div id="wrapper">
+<br>
+<strong>・WAV（音声）を準備</strong>
+<br>
+<br>
+<img src="./pic/aud.png" width="110" height="108" alt="a4book">聞きたい音声をWAVファイルに変換：Audacityを利用
+<br>：このコードで必要とするフォーマット<strong>（音声ファイルをstereo signed 16 bit・44100Hz）</strong>に変換し、SDカードに入れる。
+  <br>
+  <br>
+  SoundWavePlaybackのいらないどころを消す。（bits per sample,channels,samplerate,durationなど）
+<br>
+センサーなしで音が出るのか確認して、音が出たらセンサーをつなぎ、コードにセンサーの条件を書き込む。
+<br>
+<br><br>
+<img src="./pic/cod1.png" width="150" height="40" alt="a4book">
+
+ー＞ピン６、７を各DOOR、ZINKANに定義（宣言）。
+
+<br><br>
+<img src="./pic/cod2.png" width="250" height="44" alt="a4book">
+<br>DOORピン（６）をプールアップ抵抗に設定（宣言）。
+<br>
+ZINKANピン（７）をインプットに設定（宣言）。
+<br>
+これでこの⑵つはセンサーとしてインプットの役割を実行するようになる。
+<br><br><br>
+<img src="./pic/cod3.png" width="400" height="470" alt="a4book">
+<br>
+void loopのどころ。<br>
+<br>
+<strong>
+bool:　trueかfalseかだけを表す。スイッチが押されたかを表すに有用<br>
+DOOR、ZINKANピンを各doorState,hitoStateというボックスに入れる。（宣言）<br>
+IF文の使用：　”もし、doorStateがHIGHだったら、hitoStateがLOWかを調べて、audioを再生する”<br>
+ー＞”もし、門が開いたら（HIGH）、人が通るか（LOW)調べて、二つの条件を満たしたら音をだす”という意味になる。<br>
+</strong><br>
+（while文は、実験中シリアル通信をするため書いたものなので、作動にはいらない）<br>
+（シリアル通信も作動のはいらないし、書いたままだと電源では作動してなかったので、消しておいた）<br>
+<br>
+
+</div>
+<br>
+これで、条件を満たしたとき音を鳴らすに成功。装置の中身は完了。
+<br><br>
+<br>
+<h2><font size="4pt"><strong></strong>『②　側を作る』</font></h2>
+<strong>⑴　サイズを測って設計図を描</strong>
+<div id="wrapper">
+  <br>
+  ３Dプリントで印刷することにして、定規で装置をはかり、どんな外観にしていくか考えた
+  <br>
+  <br>
+  <img src="./pic/haka3.jpeg" width="400" height="540" alt="a4book">
+  <img src="./pic/haka4.jpeg" width="400" height="540" alt="a4book">
+  <br>
+  左：本体・右：スピーカー、人感センサー　のケース設計図。<br>
+  （意味は自分しか知らないと思うので、絵だけみてください）<br><br>
+  以下は主要な部分の写真<br><br>
+  <img src="./pic/haka2.jpeg" width="540" height="400" alt="a4book"><br>
+・OKAERIBOTの全体できな見た目（仕組み）と、本体をくるむケースの絵<br><br>
+<img src="./pic/haka1.jpeg" width="400" height="540" alt="a4book"><br>
+・本体のケースの上、下。サイズを測ったもの<br><br>
+
+</div>
+<br><br><br>
+<strong>⑵　Tinkercadで作成・印刷</strong>
+  <br><br>
+
+  測ったものと書いた図を見ながらTinkercadで３Dモデリングを作る
+  <br>
+  <br>
+  <img src="./pic/mod1.png" width="540" height="400" alt="a4book">
+  <img src="./pic/mod4.png" width="540" height="400" alt="a4book">
+<br>本体のケース（上と下）<br><br>
+<img src="./pic/mod2.png" width="540" height="400" alt="a4book">
+<img src="./pic/mod3.png" width="540" height="400" alt="a4book">
+<br>スピーカーと人感センサーのケース<br><br><br>
+<br>
+
+<strong>印刷物</strong><br>
+<img src="./pic/gawa1.jpeg" width="590" height="400" alt="a4book">
+スピーカー、人感センサー
+<br><br>
+<img src="./pic/gg2.jpeg" width="400" height="460" alt="a4book">
+
+<img src="./pic/gg1.jpeg" width="500" height="380" alt="a4book">
+本体（完成品）
+<br><br><br>
+<h2><font size="4pt"><strong></strong>『③　使用動画を取る 』</font></h2>
+<br>
+<iframe width="1093" height="615" src="https://www.youtube.com/embed/ZKeR4v5Ovwk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br>本体のケースがまだできてない時にとった動画なので、最終的な見た目とは差があります。
+<br><br><br>
+<h1><font size="5pt">3.感想</font></h1>
+<br>
+個人的には、今までやったクロステックの授業の中で一番難しくて一番頑張ったと思います。<br>
+販売するものを作るという心持ちで作ったもので色々愛情を込めました。<br>
+今の自分は２ヶ月以前とは違って、プログラミングをやったことがある人になっています。<br><br>
+
+プログラミングが初めてで、見ていてもわからないことだらけで、時間が長くかかりました。<br>
+その分勉強になったとも思いますが、ケースを可愛く作るのはそんなに力をいれれなかったので惜しいです。<br>
+<strong>”売りる見た目”</strong>について、考えるきっかけにもなりました。<br><br>
+
+想像したものを作ったことと、電子工作に挑戦したことは嬉しいです。<br>
+プログラミングのどこは、先生の助けがなかったらできなかっと思うので感謝しています。<br><br><br>
+
+
+  </body>
+</html>
